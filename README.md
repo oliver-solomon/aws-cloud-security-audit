@@ -57,7 +57,13 @@ The baseline assessment identified existing findings across EC2, IAM, S3, VPC an
 Test Misconfiguration 1 - Overly Permissive SSH 
 I intentionally changed the EC2 security group's SSH rule from a single trusted /32 address to 0.0.0.0/0. This exposes port 22 to connection attempts from any IPv4 address. This was introduced temporarily to test whether ScoutSuite would identify this issue.
 
+<img width="1268" height="140" alt="Screenshot 2026-10-04 at 8 14 16 am" src="https://github.com/user-attachments/assets/ad4e15d0-b0e2-4604-85af-e97cc4c39823" />
+
 Test Misconfiguration 2 - IAM User Without MFA
+
+I gave the test user read-only access to S3 rather than administrative permissions. I intentionally left MFA disabled to test whether ScoutSuite would identify it as a security issue.
+
+<img width="1912" height="802" alt="iam-readonly-no-mfa-side-by-side" src="https://github.com/user-attachments/assets/ef981587-ad52-4c3b-9428-6a712a2e0ee7" />
 
 Test Misconfiguration 3 - Disable S3 Block Public Access
 
