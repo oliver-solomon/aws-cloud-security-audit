@@ -26,7 +26,7 @@ Outbound rules
 
 <img width="610" height="87" alt="Screenshot 2026-10-03 at 12 09 23 pm" src="https://github.com/user-attachments/assets/60f9f122-10a8-4059-b1f4-1aeb5333622c" />
 
-S3 Storage
+### S3 Storage
 
 I created an S3 bucket with test objects to give ScoutSuite additional AWS resources to assess. Public access was blocked to keep the bucket private.
 
@@ -38,9 +38,28 @@ I created a dedicated IAM user for ScoutSuite and attached the AWS-managed Secur
 
 <img width="1863" height="844" alt="AWS IAM ScoutSuite Permissions Dashboard" src="https://github.com/user-attachments/assets/a24b9769-1c43-4988-80bb-463472dbf306" />
 
-### Step 2: Introduce Test Misconfigurations
+### Step 2: Run a Baseline ScoutSuite Assessment 
 
-### Step 3: Run ScoutSuite & Investigate Findings 
+Before introducing any test misconfigurations, I ran ScoutSuite to assess the current security state of my AWS environment and establish a baseline for later comparison.
+
+**Running the Baseline ScoutSuite Assessment**
+
+<img width="831" height="469" alt="Screenshot 2026-10-03 at 9 16 52 pm" src="https://github.com/user-attachments/assets/96d59ba8-f611-4f68-94f8-50a72c3bd67e" />
+
+**Baseline ScoutSuite Assessment Results**
+
+<img width="569" height="701" alt="Screenshot 2026-10-03 at 9 32 31 pm" src="https://github.com/user-attachments/assets/cd731b4c-dc52-429f-9329-5d67baabdc80" />
+
+The baseline assessment identified existing findings across EC2, IAM, S3, VPC and other AWS services. These results provide a reference point before introducing controlled test misconfigurations.
+
+### Step 3: Introduce Test Misconfigurations
+
+Test Misconfiguration 1 - Overly Permissive SSH 
+I intentionally changed the EC2 security group's SSH rule from a single trusted /32 address to 0.0.0.0/0. This exposes port 22 to connection attempts from any IPv4 address. This was introduced temporarily to test whether ScoutSuite would identify this issue.
+
+Test Misconfiguration 2 - IAM User Without MFA
+
+Test Misconfiguration 3 - Disable S3 Block Public Access
 
 ### Finding 1:
 
