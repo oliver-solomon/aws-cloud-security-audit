@@ -67,6 +67,14 @@ I gave the test user read-only access to S3 rather than administrative permissio
 
 Test Misconfiguration 3 - Disable S3 Block Public Access
 
-### Finding 1:
+I created an S3 bucket with the Block Public Access settings disabled. This was intentionally configured as a security misconfiguration to test whether ScoutSuite would identify the potential exposure.
 
-### Step 4: Remediate + Validate Findings
+<img width="463" height="566" alt="Screenshot 2026-10-04 at 11 11 23 pm" src="https://github.com/user-attachments/assets/c64a9d71-f4de-4650-8674-534b9b0853a9" />
+
+### Step 4: Second ScoutSuite Scan
+
+After intentionally introducing security misconfigurations into the AWS environment, I ran a second ScoutSuite scan to determine whether the security issues could be detected. I then reviewed the findings to identify the affected resources, understand the associated security risks, and determine appropriate remediation steps.
+
+<img width="570" height="701" alt="Screenshot 2026-10-04 at 11 55 58 pm" src="https://github.com/user-attachments/assets/64a44e65-58bd-4d39-82ad-ce95590fe97f" />
+
+### Step 5: Remediate + Validate Findings
