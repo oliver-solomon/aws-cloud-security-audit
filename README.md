@@ -78,3 +78,14 @@ After intentionally introducing security misconfigurations into the AWS environm
 <img width="570" height="701" alt="Screenshot 2026-10-04 at 11 55 58 pm" src="https://github.com/user-attachments/assets/64a44e65-58bd-4d39-82ad-ce95590fe97f" />
 
 ### Step 5: Remediate + Validate Findings
+Finding 1: SSH Open To Internet
+
+ScoutSuite detected that the public-ec2-sg security group allowed inbound SSH traffic on TCP port 22 from 0.0.0.0/0. This means any IPv4 address could attempt to connect to the EC2 instance over SSH.
+
+<img width="854" height="608" alt="Screenshot 2026-10-05 at 9 00 30 am" src="https://github.com/user-attachments/assets/f8100247-f903-443e-bddd-0d1b9159d037" />
+
+### Remediate Finding 1: 
+
+I changed the SSH inbound rule from 0.0.0.0/0 to my public IP /32, restricting SSH access to my network. I kept the egress rule unchanged because security groups are stateful
+
+<img width="610" height="87" alt="Screenshot 2026-10-03 at 12 08 57 pm" src="https://github.com/user-attachments/assets/a28145cc-6d26-4e41-bfef-205488daf0fe" />
