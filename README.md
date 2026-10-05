@@ -12,13 +12,13 @@ I created a VPC with separate public and private subnets, each using its own rou
 
 A NAT Gateway could be added to allow resources in the private subnet to make outbound internet connections without allowing unsolicited inbound connections. I left this out of the lab to avoid unnecessary AWS costs.
 
-<img width="1285" height="343" alt="Screenshot 2026-10-03 at 10 33 13 am" src="https://github.com/user-attachments/assets/fcbe76c0-c407-49bc-827f-499abcc6553e" />
+<img width="1285" alt="AWS network architecture with resource identifier redacted" src="images/network-architecture-redacted.png" />
 
 ### EC2 and Network Security
 
 I deployed an EC2 instance in the public subnet and configured a security group to control inbound and outbound network traffic.
 
-<img width="1609" height="978" alt="image" src="https://github.com/user-attachments/assets/1a1118e8-f3cd-4c6a-a3b1-3a638e1dd2f4" />
+<img width="1399" alt="EC2 instance details with account and resource identifiers redacted" src="images/ec2-instance-redacted.png" />
 
 Inbound rules 
 
@@ -59,7 +59,7 @@ The baseline assessment identified existing findings across EC2, IAM, S3, VPC an
 Test Misconfiguration 1 - Overly Permissive SSH 
 I intentionally changed the EC2 security group's SSH rule from a single trusted /32 address to 0.0.0.0/0. This exposes port 22 to connection attempts from any IPv4 address. This was introduced temporarily to test whether ScoutSuite would identify this issue.
 
-<img width="1268" height="140" alt="Screenshot 2026-10-04 at 8 14 16 am" src="https://github.com/user-attachments/assets/ad4e15d0-b0e2-4604-85af-e97cc4c39823" />
+<img width="954" alt="SSH test rule allowing all IPv4 sources with rule identifier redacted" src="images/ssh-test-rule-redacted.png" />
 
 Test Misconfiguration 2 - IAM User Without MFA
 
@@ -86,7 +86,7 @@ Finding 1: SSH Open To Internet
 
 ScoutSuite detected that the public-ec2-sg security group allowed inbound SSH traffic on TCP port 22 from 0.0.0.0/0. This means any IPv4 address could attempt to connect to the EC2 instance over SSH.
 
-<img width="854" height="608" alt="Screenshot 2026-10-05 at 9 00 30 am" src="https://github.com/user-attachments/assets/f8100247-f903-443e-bddd-0d1b9159d037" />
+<img width="854" alt="ScoutSuite SSH finding with account and resource identifiers redacted" src="images/ssh-finding-redacted.png" />
 
 ### Remediate Finding 1: 
 
@@ -98,12 +98,12 @@ I changed the SSH inbound rule from 0.0.0.0/0 to my public IP /32, restricting S
 
 ScoutSuite detected that test--user-no-mfa had password access enabled without MFA. If the user's password were compromised, an attacker could access the account without an additional authentication factor.
 
-<img width="542" height="426" alt="Screenshot 2026-10-05 at 12 02 47 pm" src="https://github.com/user-attachments/assets/9c3fac47-4dca-4b96-be76-a52454896141" />
+<img width="542" alt="ScoutSuite IAM user without MFA with account identifier redacted" src="images/iam-no-mfa-redacted.png" />
 
 ### Remediate Finding 2: 
 I enabled MFA for test--user-no-mfa, adding an additional authentication factor to secure the IAM user.
 
-<img width="1647" height="955" alt="image" src="https://github.com/user-attachments/assets/2f2488d3-ecc8-4e87-996c-9b803d697996" />
+<img width="954" alt="IAM user with MFA enabled and account identifiers redacted" src="images/iam-mfa-enabled-redacted.png" />
 
 ## Finding 3: S3 Public Access Block Disabled
 
