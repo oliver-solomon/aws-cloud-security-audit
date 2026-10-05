@@ -115,7 +115,7 @@ I re-enabled Block all public access to prevent the S3 bucket from accidentally 
 
 ## Step 6: Final Validation Scan
 
-Now that we properly configured the issues, we will run a final validation scan on ScoutSuite to ensure that the security concerns are fixed
+Now that I have remediated the issues, I will run a final ScoutSuite validation scan to ensure that the security concerns are fixed.
 
 ## Validating Finding 1:
 
@@ -140,3 +140,11 @@ I verified that Block all public access was enabled again, confirming that the p
 During the project, I noticed that I had been using the AWS root account for administrative tasks. I improved the account's security by using a dedicated IAM administrator account instead and locking away the root account for tasks that specifically require it.
 
 <img width="1954" height="805" alt="image" src="https://github.com/user-attachments/assets/b372841f-68b3-4eab-904c-9955086ed877" />
+
+## Conclusion 
+
+The project was about me building an AWS environment with a VPC, public/private subnets, route tables, an internet gateway, EC2 instance with a security group, S3 bucket, and IAM access for ScoutSuite. I purposely introduced misconfigurations into the environment to see whether ScoutSuite could detect them.
+
+This project helped me understand not only how to build an AWS environment, but also how to investigate misconfigurations, remediate them, and validate the findings. It showed me that finding and fixing security issues in a cloud environment is not a one-step process.
+
+Most importantly, this project improved my practical skills in investigating findings, fixing them, and validating that they were properly remediated. In future projects, I would like to go into more detail during investigations and explore more complex cloud security misconfigurations.
