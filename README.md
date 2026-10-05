@@ -57,6 +57,7 @@ The baseline assessment identified existing findings across EC2, IAM, S3, VPC an
 ### Step 3: Introduce Test Misconfigurations
 
 Test Misconfiguration 1 - Overly Permissive SSH 
+
 I intentionally changed the EC2 security group's SSH rule from a single trusted /32 address to 0.0.0.0/0. This exposes port 22 to connection attempts from any IPv4 address. This was introduced temporarily to test whether ScoutSuite would identify this issue.
 
 <img width="954" alt="SSH test rule allowing all IPv4 sources with rule identifier redacted" src="images/ssh-test-rule-redacted.png" />
