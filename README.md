@@ -1,4 +1,4 @@
-<img width="1123" height="607" alt="Screenshot 2026-10-05 at 12 18 47 pm" src="https://github.com/user-attachments/assets/142ddef5-c898-49ee-a39f-3e6a1e8bafb8" /># AWS Cloud Security Audit — ScoutSuite Misconfiguration Assessment.
+# AWS Cloud Security Audit — ScoutSuite Misconfiguration Assessment.
 AWS cloud security project using ScoutSuite to identify, investigate, and remediate security misconfigurations.
 
 ### Step 1: Building the AWS Environment 
@@ -90,7 +90,7 @@ I changed the SSH inbound rule from 0.0.0.0/0 to my public IP /32, restricting S
 
 <img width="610" height="87" alt="Screenshot 2026-10-03 at 12 08 57 pm" src="https://github.com/user-attachments/assets/a28145cc-6d26-4e41-bfef-205488daf0fe" />
 
-Finding 2: IAM Users Without MFA 
+## Finding 2: IAM Users Without MFA 
 
 ScoutSuite detected that test--user-no-mfa had password access enabled without MFA. If the user's password were compromised, an attacker could access the account without an additional authentication factor.
 
@@ -101,10 +101,42 @@ I enabled MFA for test--user-no-mfa, adding an additional authentication factor 
 
 <img width="1647" height="955" alt="image" src="https://github.com/user-attachments/assets/2f2488d3-ecc8-4e87-996c-9b803d697996" />
 
-Finding 3: S3 Public Access Block Disabled
+## Finding 3: S3 Public Access Block Disabled
 
 ScoutSuite detected that the S3 Public Access Block settings were disabled. This increases the risk of the bucket being accidentally exposed to the internet.
 
 <img width="847" height="147" alt="Screenshot 2026-10-05 at 12 24 01 pm" src="https://github.com/user-attachments/assets/cbab3dc3-cb88-4ab5-a070-2eb096eea14c" />
 
+## Remediate Finding 3: 
 
+I re-enabled Block all public access to prevent the S3 bucket from accidentally being exposed publicly through ACLs or bucket policies.
+
+<img width="708" height="264" alt="Screenshot 2026-10-05 at 12 27 40 pm" src="https://github.com/user-attachments/assets/02b42b2e-33d3-4c76-9977-6d5b4180e309" />
+
+## Step 6: Final Validation Scan
+
+Now that we properly configured the issues, we will run a final validation scan on ScoutSuite to ensure that the security concerns are fixed
+
+## Validating Finding 1:
+
+I reran ScoutSuite after remediation. The finding returned 0 rules flagged, confirming that SSH was no longer exposed to all source addresses.
+
+<img width="1111" height="204" alt="Screenshot 2026-10-05 at 1 26 40 pm" src="https://github.com/user-attachments/assets/06ecb9b7-1e15-42c5-9356-bc388a415112" />
+
+## Validating Finding 2:
+
+I reran ScoutSuite after enabling MFA. The finding returned 0 users flagged, confirming that the IAM user was no longer detected as being without MFA.
+
+<img width="1111" height="168" alt="Screenshot 2026-10-05 at 1 27 18 pm" src="https://github.com/user-attachments/assets/7ece8101-e91a-4380-84db-8b7e3dfb2929" />
+
+## Validating Finding 3: 
+
+I verified that Block all public access was enabled again, confirming that the public-access protection had been restored.
+
+<img width="839" height="148" alt="Screenshot 2026-10-05 at 3 15 12 pm" src="https://github.com/user-attachments/assets/b7b4fb1e-c82f-4b98-8981-c2629e568c5a" />
+
+## Additional Security Improvement: Root Account Usage 
+
+During the project, I noticed that I had been using the AWS root account for administrative tasks. I improved the account's security by using a dedicated IAM administrator account instead and locking away the root account for tasks that specifically require it.
+
+<img width="1954" height="805" alt="image" src="https://github.com/user-attachments/assets/b372841f-68b3-4eab-904c-9955086ed877" />
