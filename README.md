@@ -1,4 +1,4 @@
-# AWS Cloud Security Audit — ScoutSuite Misconfiguration Assessment.
+<img width="1123" height="607" alt="Screenshot 2026-10-05 at 12 18 47 pm" src="https://github.com/user-attachments/assets/142ddef5-c898-49ee-a39f-3e6a1e8bafb8" /># AWS Cloud Security Audit — ScoutSuite Misconfiguration Assessment.
 AWS cloud security project using ScoutSuite to identify, investigate, and remediate security misconfigurations.
 
 ### Step 1: Building the AWS Environment 
@@ -89,3 +89,22 @@ ScoutSuite detected that the public-ec2-sg security group allowed inbound SSH tr
 I changed the SSH inbound rule from 0.0.0.0/0 to my public IP /32, restricting SSH access to my network. I kept the egress rule unchanged because security groups are stateful
 
 <img width="610" height="87" alt="Screenshot 2026-10-03 at 12 08 57 pm" src="https://github.com/user-attachments/assets/a28145cc-6d26-4e41-bfef-205488daf0fe" />
+
+Finding 2: IAM Users Without MFA 
+
+ScoutSuite detected that test--user-no-mfa had password access enabled without MFA. If the user's password were compromised, an attacker could access the account without an additional authentication factor.
+
+<img width="542" height="426" alt="Screenshot 2026-10-05 at 12 02 47 pm" src="https://github.com/user-attachments/assets/9c3fac47-4dca-4b96-be76-a52454896141" />
+
+### Remediate Finding 2: 
+I enabled MFA for test--user-no-mfa, adding an additional authentication factor to secure the IAM user.
+
+<img width="1647" height="955" alt="image" src="https://github.com/user-attachments/assets/2f2488d3-ecc8-4e87-996c-9b803d697996" />
+
+Finding 3: S3 Public Access Block Disabled
+
+ScoutSuite detected that the S3 Public Access Block settings were disabled. This increases the risk of the bucket being accidentally exposed to the internet.
+
+<img width="847" height="147" alt="Screenshot 2026-10-05 at 12 24 01 pm" src="https://github.com/user-attachments/assets/cbab3dc3-cb88-4ab5-a070-2eb096eea14c" />
+
+
