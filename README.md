@@ -1,6 +1,8 @@
 # AWS Cloud Security Audit — ScoutSuite Misconfiguration Assessment.
 AWS cloud security project using ScoutSuite to identify, investigate, and remediate security misconfigurations.
 
+This lab focuses on three test cases: SSH open to the internet, an IAM user without MFA, and disabled S3 Block Public Access settings. The remediation and validation below cover these three cases, not every finding in the AWS account.
+
 ### Step 1: Building the AWS Environment 
 
 I created a small AWS environment to simulate a real cloud setup for the ScoutSuite security assessment.
@@ -77,6 +79,8 @@ After intentionally introducing security misconfigurations into the AWS environm
 
 <img width="570" height="701" alt="Screenshot 2026-10-04 at 11 55 58 pm" src="https://github.com/user-attachments/assets/64a44e65-58bd-4d39-82ad-ce95590fe97f" />
 
+The baseline and second scan show different numbers of resources and checks. For example, EC2 resources increased from 7 to 40 and EC2 checks from 101 to 593. The reason for this difference is not established in this write-up, so the overall finding totals are not a direct before-and-after comparison of the three test changes. The individual findings and validation results below are the evidence for each test case.
+
 ### Step 5: Remediate + Validate Findings
 Finding 1: SSH Open To Internet
 
@@ -115,7 +119,7 @@ I re-enabled Block all public access to prevent the S3 bucket from accidentally 
 
 ## Step 6: Final Validation Scan
 
-Now that I have remediated the issues, I will run a final ScoutSuite validation scan to ensure that the security concerns are fixed.
+After remediating the three test misconfigurations, I ran a final ScoutSuite validation scan to check the results.
 
 ## Validating Finding 1:
 
